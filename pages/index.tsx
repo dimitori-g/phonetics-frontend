@@ -27,9 +27,9 @@ const Glyph = () => {
   return (
     <>
       <div>Glyphs</div>
-      {glyph.map(glyph =>
+      {glyph.map((glyph) => (
         <GlyphCard key={glyph.id} glyph={glyph}></GlyphCard>
-      )}
+      ))}
     </>
   );
 };

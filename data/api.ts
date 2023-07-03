@@ -4,4 +4,3 @@ export const apiEndPoints = {
   users: 'users',
   glyph: 'glyph',
 };
-

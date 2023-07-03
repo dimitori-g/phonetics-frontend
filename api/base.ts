@@ -8,7 +8,9 @@ const api = ky.create({
 
 const fetchData = async (endPoint: string) => {
   try {
-    const data = await api.get(endPoint, { searchParams: { phonetic: "間" } }).json();
+    const data = await api
+      .get(endPoint, { searchParams: { phonetic: '間' } })
+      .json();
     return { status: 200, data: data } as ResponseOk;
   } catch (e: unknown) {
     const error = e as HTTPError;
