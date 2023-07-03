@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  front:
+    image: phonetics_front
+    container_name: phonetics_front
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
