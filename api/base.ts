@@ -6,11 +6,13 @@ const api = ky.create({
   prefixUrl: baseUrl,
 });
 
-const fetchData = async (endPoint: string) => {
+type SearchParams = {
+  phonetic: string;
+};
+
+const fetchData = async (endPoint: string, searchParams: SearchParams) => {
   try {
-    const data = await api
-      .get(endPoint, { searchParams: { phonetic: '間' } })
-      .json();
+    const data = await api.get(endPoint, { searchParams: searchParams }).json();
     return { status: 200, data: data } as ResponseOk;
   } catch (e: unknown) {
     const error = e as HTTPError;
