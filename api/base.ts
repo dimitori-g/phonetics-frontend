@@ -1,14 +1,10 @@
 import ky, { HTTPError } from 'ky';
 import { baseUrl } from '../data/api';
-import { ResponseOk, ResponseError } from '../types/api';
+import { ResponseOk, ResponseError, SearchParams } from '../types/api';
 
 const api = ky.create({
   prefixUrl: baseUrl,
 });
-
-type SearchParams = {
-  phonetic: string;
-};
 
 const fetchData = async (endPoint: string, searchParams: SearchParams) => {
   try {
