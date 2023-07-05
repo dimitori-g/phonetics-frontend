@@ -2,7 +2,11 @@ import { useState } from 'react';
 import fetchData from '../api/base';
 import { Glyph } from '../types/glyph';
 import { apiEndPoints } from '../data/api';
-import { SearchParams, SearchParamsKey, defaultSearchParams } from '../types/api';
+import {
+  SearchParams,
+  SearchParamsKey,
+  defaultSearchParams,
+} from '../types/api';
 
 import {
   Table,
@@ -31,7 +35,6 @@ const Glyph = () => {
   const [searchParams, setSearchParams] =
     useState<SearchParams>(defaultSearchParams);
 
-
   const cleanParams = (params: SearchParams): SearchParams =>
     Object.entries(params)
       .filter(([, value]) => value !== '')
@@ -59,8 +62,7 @@ const Glyph = () => {
     setIsLoading(false);
   };
 
-
-  const placeholders = ['漢', '𦰩', 'hon3', 'hàn', '한', 'KAN', 'KARA', 'hán']
+  const placeholders = ['漢', '𦰩', 'hon3', 'hàn', '한', 'KAN', 'KARA', 'hán'];
 
   return (
     <>
@@ -83,7 +85,9 @@ const Glyph = () => {
       <Button isLoading={isLoading} isActive={!isLoading} onClick={fetchGlyph}>
         Search
       </Button>
-      <Button onClick={() => setSearchParams(defaultSearchParams)}>Clear</Button>
+      <Button onClick={() => setSearchParams(defaultSearchParams)}>
+        Clear
+      </Button>
       {glyphs && glyphs.length > 0 && (
         <TableContainer padding={10}>
           <Table variant="striped" colorScheme="gray">
