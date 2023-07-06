@@ -38,6 +38,7 @@ const Glyph = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] =
     useState<SearchParams>(defaultSearchParams);
+  const [composing, setComposition] = useState(false);
 
   const cleanParams = (params: SearchParams): SearchParams =>
     Object.entries(params)
@@ -87,8 +88,10 @@ const Glyph = () => {
                       [param]: e.target.value,
                     })
                   }
+                  onCompositionStart={() => setComposition(true)}
+                  onCompositionEnd={() => setComposition(false)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
+                    if (e.key === 'Enter' && !composing) {
                       fetchGlyph();
                     }
                   }}
