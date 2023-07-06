@@ -87,6 +87,11 @@ const Glyph = () => {
                       [param]: e.target.value,
                     })
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      fetchGlyph();
+                    }
+                  }}
                   placeholder={placeholders[key]}
                   width="auto"
                 />
