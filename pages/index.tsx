@@ -15,7 +15,6 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
   Stack,
   InputGroup,
@@ -26,6 +25,11 @@ import {
   AlertDescription,
   Button,
   Input,
+  Card,
+  CardFooter,
+  CardHeader,
+  Heading,
+  CardBody,
 } from '@chakra-ui/react';
 
 const Glyph = () => {
@@ -65,61 +69,76 @@ const Glyph = () => {
   const placeholders = ['漢', '𦰩', 'hon3', 'hàn', '한', 'KAN', 'KARA', 'hán'];
 
   return (
-    <>
-      <div>Glyphs</div>
-      <Stack spacing={3}>
-        {Object.entries(searchParams).map(([param, value], key) => (
-          <InputGroup key={key}>
-            <InputLeftAddon width="120px">{param}</InputLeftAddon>
-            <Input
-              value={value}
-              onChange={(e) =>
-                setSearchParams({ ...searchParams, [param]: e.target.value })
-              }
-              placeholder={placeholders[key]}
-              width="auto"
-            />
-          </InputGroup>
-        ))}
-      </Stack>
-      <Button isLoading={isLoading} isActive={!isLoading} onClick={fetchGlyph}>
-        Search
-      </Button>
-      <Button onClick={() => setSearchParams(defaultSearchParams)}>
-        Clear
-      </Button>
+    <Stack margin={5}>
+      <Card variant="outline" size="sm" align="center">
+        <CardHeader>
+          <Heading>Glyphs</Heading>
+        </CardHeader>
+        <CardBody padding={5}>
+          <Stack>
+            {Object.entries(searchParams).map(([param, value], key) => (
+              <InputGroup key={key}>
+                <InputLeftAddon width="120px">{param}</InputLeftAddon>
+                <Input
+                  value={value}
+                  onChange={(e) =>
+                    setSearchParams({
+                      ...searchParams,
+                      [param]: e.target.value,
+                    })
+                  }
+                  placeholder={placeholders[key]}
+                  width="auto"
+                />
+              </InputGroup>
+            ))}
+          </Stack>
+        </CardBody>
+        <CardFooter>
+          <Stack direction="row" spacing={4} align="center">
+            <Button isLoading={isLoading} onClick={fetchGlyph}>
+              Search
+            </Button>
+            <Button onClick={() => setSearchParams(defaultSearchParams)}>
+              Clear
+            </Button>
+          </Stack>
+        </CardFooter>
+      </Card>
+
       {glyphs && glyphs.length > 0 && (
-        <TableContainer padding={10}>
-          <Table variant="striped" colorScheme="gray">
-            <TableCaption>Glyph Table</TableCaption>
-            <Thead>
-              <Tr>
-                <Th>Glyph</Th>
-                <Th>Phonetic</Th>
-                <Th>Cantonese</Th>
-                <Th>Pinyin</Th>
-                <Th>Korean</Th>
-                <Th>Onyomi</Th>
-                <Th>Kunyomi</Th>
-                <Th>Vietnamese</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {glyphs?.map((glyph) => (
-                <Tr key={glyph.id}>
-                  <Td>{glyph.glyph}</Td>
-                  <Td>{glyph.phonetic}</Td>
-                  <Td>{glyph.cantonese}</Td>
-                  <Td>{glyph.pinyin}</Td>
-                  <Td>{glyph.korean}</Td>
-                  <Td>{glyph.on}</Td>
-                  <Td>{glyph.kun}</Td>
-                  <Td>{glyph.vietnamese}</Td>
+        <Card size="sm" variant="outline">
+          <TableContainer>
+            <Table variant="striped" colorScheme="gray" size="sm">
+              <Thead>
+                <Tr>
+                  <Th>Glyph</Th>
+                  <Th>Phonetic</Th>
+                  <Th>Cantonese</Th>
+                  <Th>Pinyin</Th>
+                  <Th>Korean</Th>
+                  <Th>Onyomi</Th>
+                  <Th>Kunyomi</Th>
+                  <Th>Vietnamese</Th>
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+              </Thead>
+              <Tbody>
+                {glyphs?.map((glyph) => (
+                  <Tr key={glyph.id}>
+                    <Td>{glyph.glyph}</Td>
+                    <Td>{glyph.phonetic}</Td>
+                    <Td>{glyph.cantonese}</Td>
+                    <Td>{glyph.pinyin}</Td>
+                    <Td>{glyph.korean}</Td>
+                    <Td>{glyph.on}</Td>
+                    <Td>{glyph.kun}</Td>
+                    <Td>{glyph.vietnamese}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Card>
       )}
       {glyphs?.length === 0 && (
         <Alert status="info">
@@ -135,7 +154,7 @@ const Glyph = () => {
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
-    </>
+    </Stack>
   );
 };
 

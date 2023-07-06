@@ -15,11 +15,11 @@ export type ResponseError = {
 export type SearchParams = {
   glyph?: string;
   phonetic?: string;
-  pinyin?: string;
   cantonese?: string;
+  pinyin?: string;
+  korean?: string;
   on?: string;
   kun?: string;
-  korean?: string;
   vietnamese?: string;
 };
 
@@ -30,10 +30,10 @@ export type SearchParamsKey = {
 export const defaultSearchParams = {
   glyph: '',
   phonetic: '',
-  pinyin: '',
   cantonese: '',
+  pinyin: '',
+  korean: '',
   on: '',
   kun: '',
-  korean: '',
   vietnamese: '',
 };
